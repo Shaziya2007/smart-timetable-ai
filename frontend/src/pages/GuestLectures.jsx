@@ -1,13 +1,17 @@
+import GuestLectureHeader from "../components/GuestLectures/GuestLectureHeader";
+import GuestLectureStats from "../components/GuestLectures/GuestLectureStats";
+import GuestLectureTable from "../components/GuestLectures/GuestLectureTable";
+
 export default function GuestLectures() {
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold text-gray-800">
-        Guest Lectures
-      </h1>
+    <div className="space-y-6">
 
-      <p className="text-gray-500 mt-2">
-        Manage guest lecture schedules here.
-      </p>
+      <GuestLectureHeader />
+
+      <GuestLectureStats />
+
+      <GuestLectureTable />
+
     </div>
   );
 }
