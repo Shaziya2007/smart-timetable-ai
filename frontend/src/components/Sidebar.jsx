@@ -1,23 +1,49 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-<Link to="/dashboard">Dashboard</Link>
+export default function Sidebar() {
+  const location = useLocation();
 
-<Link to="/faculty">Faculty</Link>
+  const menu = [
+    { name: "Dashboard", path: "/dashboard" },
+    { name: "Faculty", path: "/faculty" },
+    { name: "Students", path: "/students" },
+    { name: "Departments", path: "/departments" },
+    { name: "Subjects", path: "/subjects" },
+    { name: "Classrooms", path: "/classrooms" },
+    { name: "Courses", path: "/courses" },
+    { name: "Time Slots", path: "/timeslots" },
+    { name: "Timetable", path: "/timetable" },
+    { name: "Guest Lectures", path: "/guestlectures" },
+    { name: "Substitute", path: "/substitute" },
+    { name: "Reports", path: "/reports" },
+    { name: "Notifications", path: "/notifications" },
+  ];
 
-<Link to="/students">Students</Link>
+  return (
+    <div className="w-64 min-h-screen bg-slate-900 text-white p-6">
 
-<Link to="/departments">Departments</Link>
+      <h1 className="text-2xl font-bold mb-8">
+        Smart Timetable
+      </h1>
 
-<Link to="/subjects">Subjects</Link>
+      <div className="space-y-2">
 
-<Link to="/classrooms">Classrooms</Link>
+        {menu.map((item) => (
+          <Link
+            key={item.path}
+            to={item.path}
+            className={`block px-4 py-3 rounded-lg transition ${
+              location.pathname === item.path
+                ? "bg-blue-600"
+                : "hover:bg-slate-700"
+            }`}
+          >
+            {item.name}
+          </Link>
+        ))}
 
-<Link to="/courses">Courses</Link>
+      </div>
 
-<Link to="/timeslots">Time Slots</Link>
-
-<Link to="/timetable">Timetable</Link>
-
-<Link to="/reports">Reports</Link>
-
-<Link to="/notifications">Notifications</Link>
+    </div>
+  );
+}
