@@ -5,12 +5,16 @@ const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const departmentRoutes = require("./routes/departmentRoutes");
 const facultyRoutes = require("./routes/facultyRoutes");
+const subjectRoutes = require("./routes/subjectRoutes");
+const classroomRoutes = require("./routes/classroomRoutes");
 
 const app = express();
 connectDB();
 
 app.use(cors());
 app.use(express.json());
+app.use("/api/subjects", subjectRoutes);
+app.use("/api/classrooms", classroomRoutes);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/departments", departmentRoutes);
