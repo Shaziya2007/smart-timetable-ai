@@ -32,21 +32,23 @@ async function loadSchedulingData() {
 
 
 
-// Assign subjects to timetable
+// Assign subjects to timetable — one entry per required weekly hour
 async function assignSubjects(subjects) {
 
     let subjectList = [];
 
-
     subjects.forEach(subject => {
 
-        subjectList.push({
-            subject: subject._id,
-            subjectName: subject.name
-        });
+        const hoursNeeded = subject.credits;   // e.g. credits = 4 → 4 sessions/week
+
+        for (let i = 0; i < hoursNeeded; i++) {
+            subjectList.push({
+                subject: subject._id,
+                subjectName: subject.name
+            });
+        }
 
     });
-
 
     return subjectList;
 }
@@ -125,116 +127,96 @@ async function assignTimeSlot(timeSlots, usedSlots = []) {
 
 }
 
+// Try every (room, timeslot) combination until one passes conflict validation
+async function findAvailableSlot(entryBase, classrooms, timeSlots, timetable) {
 
+    for (let room of classrooms) {
+
+        for (let slot of timeSlots) {
+
+            const candidate = {
+                ...entryBase,
+                classroom: room._id,
+                day: slot.day,
+                startTime: slot.startTime,
+                endTime: slot.endTime
+            };
+
+            const isValid = await validateTimetableEntry(candidate, timetable);
+
+            if (isValid) {
+                return candidate;   // first free combo wins
+            }
+        }
+    }
+
+    return null;   // genuinely no free combination exists
+}
 
 // Main timetable generation function
 async function generateTimetable(){
 
-
     const data = await loadSchedulingData();
 
-
     const timetable = [];
+    const unscheduled = [];
 
+    const subjects = await assignSubjects(data.subjects);
 
-    const subjects = await assignSubjects(
-        data.subjects
-    );
+    for (let item of subjects) {
 
+        try {
 
-    for(let item of subjects){
+            const faculty = await assignFaculty(item.subject, data.faculty);
 
+            const entryBase = {
+                subject: item.subject,
+                faculty: faculty._id
+            };
 
-        const faculty = await assignFaculty(
-            item.subject,
-            data.faculty
-        );
-
-
-        const classroom = await assignClassroom(
-            data.classrooms
-        );
-
-
-        const timeSlot = await assignTimeSlot(
-            data.timeSlots,
-            timetable
-        );
-
-
-
-        const timetableEntry = {
-
-
-            subject: item.subject,
-
-            faculty: faculty._id,
-
-            classroom: classroom._id,
-
-
-            day: timeSlot.day,
-
-            startTime: timeSlot.startTime,
-
-            endTime: timeSlot.endTime
-
-
-        };
-
-
-
-        const isValid =
-            await validateTimetableEntry(
-                timetableEntry,
+            const entry = await findAvailableSlot(
+                entryBase,
+                data.classrooms,
+                data.timeSlots,
                 timetable
             );
 
+            if (entry) {
+                timetable.push(entry);
+            } else {
+                unscheduled.push({
+                    subject: item.subject,
+                    subjectName: item.subjectName,
+                    reason: "No available room/timeslot combination found"
+                });
+            }
 
+        } catch (err) {
 
-        if(isValid){
-
-
-            timetable.push(
-                timetableEntry
-            );
-
+            unscheduled.push({
+                subject: item.subject,
+                subjectName: item.subjectName,
+                reason: err.message
+            });
 
         }
-
-
     }
 
-
-
     return {
-
-        success:true,
-
-        message:"Timetable generated successfully",
-
-        timetable
-
+        success: true,
+        message: "Timetable generated successfully",
+        timetable,
+        unscheduled
     };
-
 }
 
 
-
 module.exports = {
-
-
     generateTimetable,
-
     loadSchedulingData,
-
     assignSubjects,
-
     assignFaculty,
-
     assignClassroom,
-
-    assignTimeSlot
-
-
+    assignTimeSlot,
+    findAvailableSlot
 };

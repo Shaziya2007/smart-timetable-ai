@@ -1,6 +1,7 @@
 const Faculty = require("../models/Faculty");
 const Classroom = require("../models/Classroom");
 const TimeSlot = require("../models/TimeSlot");
+const Subject = require("../models/Subject");
 
 
 async function checkFacultyConflict(facultyId, day, startTime, endTime, timetable = []) {
@@ -72,44 +73,45 @@ async function checkLabRequirement() {
 }
 
 
-async function checkWeeklyHours() {
+async function checkWeeklyHours(subjectId, timetable = []) {
 
-    return true;
+    const subject = await Subject.findById(subjectId);
 
+    if (!subject) {
+        throw new Error("Subject not found");
+    }
+
+    const scheduledCount = timetable.filter(
+        (item) => item.subject.toString() === subjectId.toString()
+    ).length;
+
+    return scheduledCount < subject.credits;   // true = still room for more hours
 }
 
 
 async function validateTimetableEntry(data, timetable = []) {
 
     const facultyConflict = await checkFacultyConflict(
-        data.faculty,
-        data.day,
-        data.startTime,
-        data.endTime,
-        timetable
+        data.faculty, data.day, data.startTime, data.endTime, timetable
     );
-
 
     const roomConflict = await checkRoomConflict(
-        data.classroom,
-        data.day,
-        data.startTime,
-        data.endTime,
-        timetable
+        data.classroom, data.day, data.startTime, data.endTime, timetable
     );
 
+    const facultyAvailable = await checkFacultyAvailability(data.faculty);
 
-    if(facultyConflict || roomConflict){
+    const withinWeeklyHours = await checkWeeklyHours(data.subject, timetable);
+
+    if (facultyConflict || roomConflict || !facultyAvailable || !withinWeeklyHours) {
         return false;
     }
-
 
     return true;
 }
 
 
 module.exports = {
-
     checkFacultyConflict,
     checkRoomConflict,
     checkSectionConflict,
@@ -119,5 +121,4 @@ module.exports = {
     checkLabRequirement,
     checkWeeklyHours,
     validateTimetableEntry
-
 };
