@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
+import StudentSidebar from "../components/sidebar/StudentSidebar";
 import Navbar from "../components/Navbar";
 
-export default function Layout() {
+export default function StudentLayout() {
   return (
     <div className="flex h-screen bg-gray-100">
 
-      <Sidebar />
+      <StudentSidebar />
 
       <div className="flex-1 flex flex-col">
 

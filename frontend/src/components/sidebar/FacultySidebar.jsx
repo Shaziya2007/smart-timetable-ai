@@ -1,30 +1,22 @@
 import { Link, useLocation } from "react-router-dom";
 
-export default function Sidebar() {
+export default function FacultySidebar() {
   const location = useLocation();
 
   const menu = [
-    { name: "Dashboard", path: "/admin" },
-    { name: "Faculty", path: "/admin/faculty" },
-    { name: "Students", path: "/admin/students" },
-    { name: "Departments", path: "/admin/departments" },
-    { name: "Subjects", path: "/admin/subjects" },
-    { name: "Classrooms", path: "/admin/classrooms" },
-    { name: "Courses", path: "/admin/courses" },
-    { name: "Time Slots", path: "/admin/timeslots" },
-    { name: "Timetable", path: "/admin/timetable" },
-    { name: "Guest Lectures", path: "/admin/guestlectures" },
-    { name: "Substitute", path: "/admin/substitute" },
-    { name: "Reports", path: "/admin/reports" },
-    { name: "Notifications", path: "/admin/notifications" },
+    { name: "Dashboard", path: "/faculty" },
+    { name: "My Schedule", path: "/faculty/schedule" },
+    { name: "Notifications", path: "/faculty/notifications" },
   ];
 
   return (
     <div className="w-64 min-h-screen bg-slate-900 text-white p-6">
-      <h1 className="text-2xl font-bold">Smart Timetable</h1>
+      <h1 className="text-2xl font-bold">
+        Smart Timetable
+      </h1>
 
       <p className="text-gray-400 text-sm mb-8">
-        Admin Portal
+        Faculty Portal
       </p>
 
       <div className="space-y-2">
