@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
-
 // ================= ADMIN PAGES =================
 import Dashboard from "./pages/Dashboard";
 import Faculty from "./pages/Faculty";
@@ -20,22 +19,15 @@ import Substitute from "./pages/Substitute";
 import Reports from "./pages/Reports";
 import Notifications from "./pages/Notifications";
 
-// Student Module
-import StudentLogin from "./pages/StudentLogin";
-import StudentDashboard from "./pages/StudentDashboard";
-
-
 // ================= LAYOUTS =================
 import AdminLayout from "./layouts/AdminLayout";
 import FacultyLayout from "./layouts/FacultyLayout";
 import StudentLayout from "./layouts/StudentLayout";
 
-
 // ================= FACULTY PAGES =================
 import FacultyDashboard from "./pages/faculty/Dashboard";
 import MySchedule from "./pages/faculty/MySchedule";
 import FacultyNotifications from "./pages/faculty/Notifications";
-
 
 // ================= STUDENT PAGES =================
 import StudentDashboard from "./pages/student/Dashboard";
@@ -49,9 +41,6 @@ export default function App() {
 
       <Routes>
 
-        {/* Authentication */}
-
-
         {/* ================= PUBLIC ================= */}
 
         <Route 
@@ -59,9 +48,18 @@ export default function App() {
           element={<Login />} 
         />
 
-        <Route path="/register" element={<Register />} />
+        <Route 
+          path="/register" 
+          element={<Register />} 
+        />
 
-        <Route element={<Layout />}>
+
+        {/* ================= ADMIN ================= */}
+
+        <Route 
+          path="/admin" 
+          element={<AdminLayout />}
+        >
 
           <Route 
             index 
@@ -132,7 +130,6 @@ export default function App() {
 
 
 
-
         {/* ================= FACULTY ================= */}
 
         <Route 
@@ -159,7 +156,6 @@ export default function App() {
 
 
 
-
         {/* ================= STUDENT ================= */}
 
         <Route 
@@ -182,15 +178,7 @@ export default function App() {
             element={<StudentNotifications />} 
           />
 
-          {/* Student */}
-
-          <Route
-            path="/student-dashboard"
-            element={<StudentDashboard />}
-          />
-
         </Route>
-
 
 
       </Routes>
