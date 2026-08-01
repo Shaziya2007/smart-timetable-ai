@@ -1,0 +1,31 @@
+export default function StudentPagination() {
+  return (
+    <div className="bg-white rounded-2xl shadow-md p-5 flex justify-between items-center">
+
+      <p className="text-gray-500">
+        Showing 1-3 of 2500 Students
+      </p>
+
+      <div className="flex gap-2">
+
+        <button className="px-4 py-2 border rounded-lg">
+          Previous
+        </button>
+
+        <button className="px-4 py-2 bg-blue-600 text-white rounded-lg">
+          1
+        </button>
+
+        <button className="px-4 py-2 border rounded-lg">
+          2
+        </button>
+
+        <button className="px-4 py-2 border rounded-lg">
+          Next
+        </button>
+
+      </div>
+
+    </div>
+  );
+}

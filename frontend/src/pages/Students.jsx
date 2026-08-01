@@ -1,13 +1,23 @@
+import StudentHeader from "../components/students/StudentHeader";
+import StudentCards from "../components/students/StudentCards";
+import StudentFilters from "../components/students/StudentFilters";
+import StudentTable from "../components/students/StudentTable";
+import StudentPagination from "../components/students/StudentPagination";
+
 export default function Students() {
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold text-gray-800">
-        Students
-      </h1>
+    <div className="space-y-6">
 
-      <p className="mt-2 text-gray-500">
-        Manage students here.
-      </p>
+      <StudentHeader />
+
+      <StudentCards />
+
+      <StudentFilters />
+
+      <StudentTable />
+
+      <StudentPagination />
+
     </div>
   );
 }
