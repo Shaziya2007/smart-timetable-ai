@@ -8,6 +8,7 @@ const facultyRoutes = require("./routes/facultyRoutes");
 const subjectRoutes = require("./routes/subjectRoutes");
 const classroomRoutes = require("./routes/classroomRoutes");
 const timeSlotRoutes = require("./routes/timeSlotRoutes");
+const timetableRoutes = require("./routes/timetableRoutes");
 
 const app = express();
 connectDB();
@@ -21,6 +22,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/departments", departmentRoutes);
 app.use("/api/faculty", facultyRoutes);
 app.use("/api/timeslots", timeSlotRoutes);
+app.use("/api/timetables", timetableRoutes);
 
 // Test Route
 app.get("/", (req, res) => {
