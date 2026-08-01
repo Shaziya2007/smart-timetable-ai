@@ -1,36 +1,28 @@
 import { Link, useLocation } from "react-router-dom";
 
-export default function Sidebar() {
+export default function StudentSidebar() {
   const location = useLocation();
 
   const menu = [
-    { name: "Dashboard", path: "/admin" },
-    { name: "Faculty", path: "/admin/faculty" },
-    { name: "Students", path: "/admin/students" },
-    { name: "Departments", path: "/admin/departments" },
-    { name: "Subjects", path: "/admin/subjects" },
-    { name: "Classrooms", path: "/admin/classrooms" },
-    { name: "Courses", path: "/admin/courses" },
-    { name: "Time Slots", path: "/admin/timeslots" },
-    { name: "Timetable", path: "/admin/timetable" },
-    { name: "Guest Lectures", path: "/admin/guestlectures" },
-    { name: "Substitute", path: "/admin/substitute" },
-    { name: "Reports", path: "/admin/reports" },
-    { name: "Notifications", path: "/admin/notifications" },
+    { name: "Dashboard", path: "/student" },
+    { name: "My Timetable", path: "/student" },
+    { name: "Notifications", path: "/student" },
   ];
 
   return (
     <div className="w-64 min-h-screen bg-slate-900 text-white p-6">
-      <h1 className="text-2xl font-bold">Smart Timetable</h1>
+      <h1 className="text-2xl font-bold">
+        Smart Timetable
+      </h1>
 
       <p className="text-gray-400 text-sm mb-8">
-        Admin Portal
+        Student Portal
       </p>
 
       <div className="space-y-2">
         {menu.map((item) => (
           <Link
-            key={item.path}
+            key={item.name}
             to={item.path}
             className={`block px-4 py-3 rounded-lg transition ${
               location.pathname === item.path
