@@ -5,8 +5,8 @@ export default function FacultySidebar() {
 
   const menu = [
     { name: "Dashboard", path: "/faculty" },
-    { name: "My Schedule", path: "/faculty" },
-    { name: "Notifications", path: "/faculty" },
+    { name: "My Schedule", path: "/faculty/schedule" },
+    { name: "Notifications", path: "/faculty/notifications" },
   ];
 
   return (
@@ -22,7 +22,7 @@ export default function FacultySidebar() {
       <div className="space-y-2">
         {menu.map((item) => (
           <Link
-            key={item.name}
+            key={item.path}
             to={item.path}
             className={`block px-4 py-3 rounded-lg transition ${
               location.pathname === item.path
@@ -45,4 +45,4 @@ export default function FacultySidebar() {
       </div>
     </div>
   );
-} 
+}

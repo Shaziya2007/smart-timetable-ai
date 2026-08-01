@@ -6,25 +6,43 @@ export default function StudentDashboard() {
         Student Dashboard
       </h1>
 
-      <p className="mt-4 text-gray-600">
-        Welcome to the Student Portal.
+      <p className="text-gray-500 mt-2">
+        Welcome to Smart Timetable Student Portal
       </p>
+
 
       <div className="grid grid-cols-3 gap-6 mt-8">
 
-        <div className="bg-white p-6 rounded-xl shadow">
-          <h2 className="font-semibold">Today's Classes</h2>
-          <p className="text-3xl mt-2">6</p>
+        <div className="bg-white rounded-xl shadow p-6">
+          <h2 className="text-gray-500">
+            Today's Classes
+          </h2>
+
+          <p className="text-4xl font-bold mt-3">
+            6
+          </p>
         </div>
 
-        <div className="bg-white p-6 rounded-xl shadow">
-          <h2 className="font-semibold">Attendance</h2>
-          <p className="text-3xl mt-2">92%</p>
+
+        <div className="bg-white rounded-xl shadow p-6">
+          <h2 className="text-gray-500">
+            Attendance
+          </h2>
+
+          <p className="text-4xl font-bold mt-3">
+            92%
+          </p>
         </div>
 
-        <div className="bg-white p-6 rounded-xl shadow">
-          <h2 className="font-semibold">Notifications</h2>
-          <p className="text-3xl mt-2">4</p>
+
+        <div className="bg-white rounded-xl shadow p-6">
+          <h2 className="text-gray-500">
+            Notifications
+          </h2>
+
+          <p className="text-4xl font-bold mt-3">
+            4
+          </p>
         </div>
 
       </div>
