@@ -17,21 +17,31 @@ import Substitute from "./pages/Substitute";
 import Reports from "./pages/Reports";
 import Notifications from "./pages/Notifications";
 
+// Student Module
+import StudentLogin from "./pages/StudentLogin";
+import StudentDashboard from "./pages/StudentDashboard";
+
 import Layout from "./layouts/Layout";
 
 export default function App() {
-
   return (
-
     <BrowserRouter>
 
       <Routes>
+
+        {/* Authentication */}
 
         <Route path="/" element={<Login />} />
 
         <Route path="/register" element={<Register />} />
 
+        <Route path="/student-login" element={<StudentLogin />} />
+
+        {/* Main Layout */}
+
         <Route element={<Layout />}>
+
+          {/* Admin */}
 
           <Route path="/dashboard" element={<Dashboard />} />
 
@@ -59,12 +69,17 @@ export default function App() {
 
           <Route path="/notifications" element={<Notifications />} />
 
+          {/* Student */}
+
+          <Route
+            path="/student-dashboard"
+            element={<StudentDashboard />}
+          />
+
         </Route>
 
       </Routes>
 
     </BrowserRouter>
-
   );
-
 }

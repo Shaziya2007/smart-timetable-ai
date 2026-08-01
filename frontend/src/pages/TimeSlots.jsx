@@ -1,7 +1,15 @@
+import TimeSlotHeader from "../components/timeslots/TimeSlotHeader";
+import TimeSlotCards from "../components/timeslots/TimeSlotCards";
+import TimeSlotSummary from "../components/timeslots/TimeSlotSummary";
+import TimeSlotTable from "../components/timeslots/TimeSlotTable";
+
 export default function TimeSlots() {
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold">Time Slots</h1>
+    <div className="space-y-6">
+      <TimeSlotHeader />
+      <TimeSlotCards />
+      <TimeSlotSummary />
+      <TimeSlotTable />
     </div>
   );
 }

@@ -1,13 +1,15 @@
+import ClassroomHeader from "../components/classrooms/ClassroomHeader";
+import ClassroomCards from "../components/classrooms/ClassroomCards";
+import ClassroomSummary from "../components/classrooms/ClassroomSummary";
+import ClassroomTable from "../components/classrooms/ClassroomTable";
+
 export default function Classrooms() {
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold text-gray-800">
-        Classrooms
-      </h1>
-
-      <p className="mt-2 text-gray-500">
-        Manage classrooms here.
-      </p>
+    <div className="space-y-6">
+      <ClassroomHeader />
+      <ClassroomCards />
+      <ClassroomSummary />
+      <ClassroomTable />
     </div>
   );
 }
